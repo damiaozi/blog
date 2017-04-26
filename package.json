@@ -1,0 +1,19 @@
+{
+  "name": "miaozi-blog",
+  "version": "1.0.0",
+  "description": "blog use nodejs by damiaozi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "blog",
+    "nodejs",
+    "damiaozi"
+  ],
+  "author": "damiaozi",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^2.2.26"
+  }
+}

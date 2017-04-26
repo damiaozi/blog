@@ -1,0 +1,47 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="utf-8" /> 
+<title>背景半透明覆盖整个可视区域</title> 
+<style> 
+html,body{ height:100%; margin:0; padding:0; font-size:14px;} 
+p{ line-height:18px;} 
+.mask{height:100%; width:100%; position:fixed; _position:absolute; top:0; z-index:1000; } 
+.opacity{ opacity:0.3; filter: alpha(opacity=30); background-color:#000; } 
+.content{height:600px; width:800px; overflow:auto; border:2px solid #ccc; background-color:#fff; position:absolute; top:50%; left:50%; margin:-300px auto auto -400px; z-index:1001; word-wrap: break-word; padding:3px;} 
+.ph{ height:1000px;} 
+</style> 
+</head> 
+<body> 
+<p class="ph">place holder height:1000px;</p> 
+<div class="mask opacity"></div> 
+<div class="content"> 
+<h1>背景半透明覆盖整个可视区域</h1> 
+<p> 这个效果效果在工作中经常会遇到，这篇文章主要介绍了当内容超过一屏时如何做到多浏览器的兼容性。 下面我们通过一个简单的例子看看如何实现，高手请绕道。 </p> 
+<p>html代码很简单 < d i v class="mask opacity">< / d i v > </p> 
+<p> 1 、半透明效果可以使用 css3 中的 opacity 属性，在低版本的IE浏览器中使用IE的alpha 滤镜。代码: 
+
+<code>.opacity{ opacity:0.3; filter: alpha(opacity=30); background-color:#000; }</code> </p> 
+<p> 2 、要覆盖整个可视区域通常的做法是: <br/> 
+<code> html,body{ height:100%} </code> <br/> 
+<code>.mask{height:100%;width:100%;}</code> <br/> 
+但是这样做当内容超过一屏时只有IE6下显示的效果是我们所期望的，在其他浏览器中首屏以下的没能被遮盖住，为了兼容其他浏览器我们可以使用<code>position:fixed; </code>来解决这个问题 </p> 
+<p> <strong>完整的代码</strong>: 
+<pre> 
+html,body{ height:100%; margin:0; padding:0} 
+.mask{height:100%; width:100%; position:fixed; _position:absolute; top:0; z-index:1000; } 
+.opacity{ opacity:0.3; filter: alpha(opacity=30); background-color:#000; } 
+</pre> 
+</p> 
+<p> <strong>参考资料：</strong>
+
+<a href="http://sofish.de/1916">背景半透明最佳实践</a>
+
+<a href="http://sofish.de/1909">垂直居中的几种实现方法</a>
+
+<a href="http://blog.moocss.com/code-snippets/html-css-code-snippets/1617.html">DIV 高度100%</a>
+
+</p> 
+</div> 
+</body> 
+</html> 

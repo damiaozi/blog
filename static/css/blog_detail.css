@@ -1,0 +1,181 @@
+/*min-width:1200*/
+
+
+header{
+	width: 100%;
+	height: auto;
+	background-color: rgba(0,0,0,.8);
+}
+
+.blog-nav{
+	
+	height: 50px;
+	margin: 0 40px;
+	
+}
+
+
+.nav-left{
+	float: left;
+	height: 100%;
+	line-height: 50px;
+	color: #fff;
+	font-size: 20px;
+}
+
+.blog-nav nav{
+	float: right;
+	color: #fff;
+	line-height: 50px;
+	font-size: 16px;
+}
+
+.blog-nav nav li{
+	float: left;
+}
+
+.blog-nav>nav li a{
+	color: #fff;
+	margin: 0 8px;
+}
+.blog-nav>nav .active a{
+	color: #ccc;
+}
+
+.blog-nav>nav li a:hover{
+	color: #7bbcff;
+}
+
+
+
+/*文章列表详情*/
+article{
+	margin: 0 auto;
+	max-width: 1200px;
+	
+}
+
+.blog-item{
+	padding: 30px 30px 0px 30px;
+	
+}
+.blog-content{
+	background-color: #fff;
+	padding: 30px;
+}
+.blog-content h2{
+	color: #333;
+	font-size: 24px;
+	font-weight: 500;
+}
+
+
+
+/*头像*/
+.blog-content .message-title{
+	color: #333;
+	font-size: 16px;
+	font-weight: 500;
+	overflow: hidden;
+	margin: 10px 0px;
+}
+.blog-content .message-title>img{
+	
+	width: 60px;
+	height: 60px;
+	float: left;
+}
+.blog-content .msg-user{
+	float: left;
+	margin-left: 10px;
+	margin-top: 5px;
+}
+.blog-content .msg-user a{
+	color: #f00;
+}
+
+.blog-content .msg-user span{
+	display: block;
+	color: #ccc;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+
+/*博客详情内容*/
+.blog-content .blog-review>p{
+	color: #666;
+	font-size: 16px;
+}
+
+.blog-info{
+	overflow: hidden;
+	margin-top: 20px;
+	color: #ccc;
+}
+
+/*分类按钮*/
+.blog-info .blog-tag{
+	display: inline;
+	float: left;
+
+}
+
+.blog-info .blog-tag>a{
+	display: inline-block;
+	color: #fff;
+	padding: 2px 10px;
+	background-color: #7bbcff;
+	font-size: 14px;
+}
+
+.blog-info .blog-tag>a:hover{
+	background-color: #3d9cfd;
+}
+
+.blog-info .blog-read{
+	float: right;
+}
+
+.blog-read span{
+	margin-right: 5px;
+}
+
+
+/*底部*/
+
+footer{
+	padding: 40px;
+	background-color: #fff;
+	margin-top: 30px;
+}
+
+.blog-footer{
+	min-width: 100px;
+	margin: 0px auto;
+	text-align: center;
+	font-size: 12px;
+}
+.blog-footer a{
+	cursor: pointer;
+}
+.blog-footer a:hover{
+	color: #f00;
+}
+
+/*max-width:900*/
+
+@media (max-width: 900px){
+	.blog-type-nav li>a {
+	    font-size: 14px;
+	    margin: 0 10px 4px 0;
+	    padding: 4px 10px;
+	}
+
+}
+
+
+/*max-width:800*/
+
+
+
