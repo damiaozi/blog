@@ -1,5 +1,5 @@
 // 顶部类别隐藏
-var oBlogType = $('#blog-type');
+var oBlogType = $('#j-blog-type');
 var showBlogType = function(){
 	if(oBlogType.css('display') == 'none'){
 		oBlogType.css('display','block');
@@ -8,7 +8,7 @@ var showBlogType = function(){
 	}
 };
 
-$('#blog-search').click(showBlogType);
+$('#j-blog-search').click(showBlogType);
 
 
 // 请求服务器，获取当前博客列表数据
@@ -20,11 +20,21 @@ var oBlogLst = $('#blog-list');
 var oPageLst = $('#j-page-list');
 
 getBlogLst(1);
+
+//分类id
+var nTypeid = -1;
+var aTypeA = $('#j-blog-type a');
+aTypeA.click(function(){
+	nTypeid = $(this).attr('data-typeid');
+	bPageInit = false;
+	getBlogLst(1);
+});
+
 function getBlogLst(page){
 	$.ajax({
 		type:'get',
 		url:sUrlBloglst,
-		data:{'page':page,'rows':10},
+		data:{'page':page,'rows':10,'typeid':nTypeid},
 		dataType:'json',
 		success:function(json){
 			// console.log('blog_list',json);
@@ -67,6 +77,7 @@ var bPageInit = false;
 //初始化分页的数据
 function pageInit(total){
 	bPageInit = true;
+	oPageLst.children().remove();
 	//分页选项设置total个
 	for (var i = 0; i < total; i++) {
 		var sLi = `<li><a href="#">${i+1}</a></li>`;

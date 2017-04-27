@@ -132,19 +132,27 @@ const server = http.createServer((req,res)=>{
 			//获取文章列表接口
 			else if (req.url.indexOf('bloglist')>=0){
 				if(getReq['page']){
+					//判断是否存在分类id
+					let nTypeid = -1;
+					if(getReq['typeid']){
+						nTypeid = getReq['typeid'];
+					}
+					 console.log('nTypeid',nTypeid);
+					let jQuery = {};
+					if (nTypeid!=-1) {
+						jQuery["typeid"]=parseInt(nTypeid);
+						// jQuery = {typeid:nTypeid};这个做法是错误的
+					}
+					 // console.log('jQuery',jQuery);
 					let nPage = parseInt(getReq['page']);
-					// console.log('nPage',nPage);
-					// console.log('nPage',typeof nPage);
-					// console.log('ppage',parseInt(nPage));
 					let nRows = parseInt(getReq['rows']);
 					// console.log('nRows',nRows);
-
 					let nSkip = (nPage-1)*nRows;
 					// console.log('nSkip',nSkip);
 					//传了blogid这个字段
 					let cBlogTb = db.collection('blog_tb');
-					cBlogTb.find({}).skip(nSkip).limit(nRows).toArray((err,data)=>{
-						// console.log('findData',data);
+					cBlogTb.find(jQuery).skip(nSkip).limit(nRows).toArray((err,data)=>{
+						console.log('findData',data);
 						let json = JSON.stringify(data);
 						
 						//计算总共有多少条数据，返回页码给total
