@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>后台管理-发布文章</title>
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/publish.css">
+</head>
+<body>
+	<!-- 最大宽度1200px -->
+	<!-- 900有个固定margin -->
+	<!-- 800导航条变化 -->
+	<header id="blog-head">
+		<div class="blog-nav">
+			<div class="nav-left">Miaozi博客后台</div>
+			<nav>
+				<ul>
+					<li><a href="index.html">首页</a></li>
+					<li><a href="blog.html">文章管理</a></li>
+					<li><a href="message.html">留言管理</a></li>
+					<li class="active"><a href="#">发布文章</a></li>
+				</ul>
+			</nav>
+		</div>
+
+	</header>
+	<article>
+		
+		<section class="index-media">
+			<div class="media-bg"></div>
+			<div class="media-info">
+				<p class="media-tittle">添加博客文章</p>
+				<p class="media-subtile">每一项都要填写</p>
+				<div class="msg-container">
+					
+						<div>
+							<p>标题:</p>
+							<input id="js-blog-tittle" type="text">
+						</div>
+						<div>
+							<p>简要:</p>
+							<input id="js-blog-brief" type="text">
+						</div>
+						<div>
+							<p>作者:</p>
+							<input id="js-blog-autor" type="text">
+						</div>
+					<div>
+						<p>分类:</p>
+						<select id="js-blog-type">
+							<option value="0">Node.JS</option>
+							<option value="1">Javascript</option>
+							<option value="2">html</option>
+							<option value="3">css</option>
+							<option value="4">PHP</option>
+							<option value="5">Android</option>
+							<option value="6">前端基础</option>
+							<option value="7">杂谈</option>
+						</select>
+					</div>
+					<div>
+						<p>文章内容:</p>
+						<textarea id="js-blog-detail"></textarea>
+					</div>
+
+				</div>
+				<button id="j-msg-send">Send</button>
+			</div>
+		</section>
+	
+	</article>
+	<footer>
+		<div class="blog-footer">
+			<p>(C) 2010-2016 code & design by <a>Miaozi</a> powered by Node.js</p>
+		</div>
+	</footer>
+	<script src="js/jquery-1.12.4.js"></script>
+	<script src="js/publish.js" ></script>
+</body>
+</html>

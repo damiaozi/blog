@@ -1,0 +1,184 @@
+/*min-width:1200*/
+
+
+header{
+	width: 100%;
+	height: auto;
+	background-color: rgba(0,0,0,.8);
+}
+
+.blog-nav{
+	
+	height: 50px;
+	margin: 0 40px;
+	
+}
+
+
+.nav-left{
+	float: left;
+	height: 100%;
+	line-height: 50px;
+	color: #fff;
+	font-size: 20px;
+}
+
+.blog-nav nav{
+	float: right;
+	color: #fff;
+	line-height: 50px;
+	font-size: 16px;
+}
+
+.blog-nav nav li{
+	float: left;
+}
+
+.blog-nav>nav li a{
+	color: #fff;
+	margin: 0 8px;
+}
+
+
+.blog-nav>nav .active a{
+	color: #ccc;
+}
+
+.blog-nav>nav li a:hover{
+	color: #7bbcff;
+}
+
+
+
+/*首页详情*/
+article{
+	position: relative;
+	/*margin: 0 auto;*/
+	/*max-width: 1200px;*/
+	width: 100%;
+	
+}
+
+/*联系方式*/
+.index-media{
+	position: relative;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	min-height: 800px;
+}
+
+.index-media .media-bg{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	background: url("../images/index/admin_bg1.jpg") no-repeat;
+	background-position: center;
+	width: 100%;
+	height: 100%;
+	opacity: 0.8;
+
+}
+.index-media .media-info{
+	position: absolute;
+	top: 30px;
+	left: 50%;
+	
+	height: 100%;
+	z-index: 2;
+	min-width: 300px;
+	margin-left: -150px;
+
+	
+}
+
+.index-media .media-tittle{
+	margin-top: 2%;
+	font-size: 28px;
+	color: #fff;
+}
+.index-media .media-tittle:hover{
+	color: #eee;
+}
+
+.index-media .media-subtile{
+	margin-top: .5%;
+	font-size: 14px;
+	color: #ccc;
+}
+.index-media .media-subtile:hover{
+	color: #fff;
+}
+.index-media .media-info>a{
+	display: inline-block;
+	padding: 10px 26px;
+	background-color: rgba(255,255,255,0.7);
+	font-size: 18px;
+	color: #333;
+	margin-top: 10%;
+}
+.index-media .media-info>a:hover{
+	background-color: rgba(255,255,255,0.1);
+	color: #fff;
+	border: 1px solid #fff;
+	
+}
+.media-info input{
+	width: 100%;
+	height: 40px;
+}
+.media-info textarea{
+	width: 100%;
+	height: 250px;
+}
+
+
+/*表单*/
+.msg-container{
+	margin-top: 30px;
+	color: #fff;
+	font-size: 20px;
+
+}
+.msg-container p{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+
+/*底部*/
+
+footer{
+	padding: 40px;
+	background-color: #fff;
+}
+
+.blog-footer{
+	min-width: 100px;
+	margin: 0px auto;
+	text-align: center;
+	font-size: 12px;
+}
+.blog-footer a{
+	cursor: pointer;
+}
+.blog-footer a:hover{
+	color: #f00;
+}
+
+/*max-width:900*/
+
+@media (max-width: 900px){
+	.blog-type-nav li>a {
+	    font-size: 14px;
+	    margin: 0 10px 4px 0;
+	    padding: 4px 10px;
+	}
+
+}
+
+
+/*max-width:800*/
+
+
+

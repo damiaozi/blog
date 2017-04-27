@@ -38,7 +38,7 @@ const server = http.createServer((req,res)=>{
 	{
 		//有参数,处理ajax请求
 		let getReq = querystring.parse(theUrl.query);
-		// console.log('getReq',getReq);
+		console.log('getReq',getReq);
 		let json = {};
 		//判断是什么接口
 		
@@ -137,7 +137,7 @@ const server = http.createServer((req,res)=>{
 					if(getReq['typeid']){
 						nTypeid = getReq['typeid'];
 					}
-					 console.log('nTypeid',nTypeid);
+					 // console.log('nTypeid',nTypeid);
 					let jQuery = {};
 					if (nTypeid!=-1) {
 						jQuery["typeid"]=parseInt(nTypeid);
@@ -152,11 +152,11 @@ const server = http.createServer((req,res)=>{
 					//传了blogid这个字段
 					let cBlogTb = db.collection('blog_tb');
 					cBlogTb.find(jQuery).skip(nSkip).limit(nRows).toArray((err,data)=>{
-						console.log('findData',data);
+						// console.log('findData',data);
 						let json = JSON.stringify(data);
 						
 						//计算总共有多少条数据，返回页码给total
-						cBlogTb.count((err,count)=>{
+						cBlogTb.count(jQuery,(err,count)=>{
 							let total = Math.ceil(count/10);
 							json = `{"total":${total},"data":${json}}`;
 						
@@ -181,7 +181,204 @@ const server = http.createServer((req,res)=>{
 				}
 			}
 
+			//添加留言内容接口
+			else if (req.url.indexOf('setmsg')>=0) {
+				if(getReq['content']){
+					let jData = {};
+					jData['userid'] = getReq['userid'];
+					jData['name'] = getReq['name'];
+					jData['contact'] = getReq['contact'];
+					jData['content'] = getReq['content'];
+					jData['createtime'] = new Date();
+					jData['colnum'] = 0;
+					let cMessage = db.collection('message_tb');
+					cMessage.insertOne(jData,(err,_res)=>{
+						// console.log('insertOne',_res);
+						if (err) {
+				            console.log("Error:" + err);
+				            res.writeHead(300, {});
+							res.end('err');
+				        }else{
+				        	console.log("cMessage:" ,'ok');
+				        	res.writeHead(200, {});
+							res.end('ok');
+				        }
+				        db.close();
+					});	
+				}
+			}
 
+			//获取留言板列表接口
+			else if (req.url.indexOf('msglist')>=0){
+				if(getReq['page']){
+				
+					 // console.log('jQuery',jQuery);
+					let nPage = parseInt(getReq['page']);
+					let nRows = parseInt(getReq['rows']);
+					// console.log('nRows',nRows);
+					let nSkip = (nPage-1)*nRows;
+					// console.log('nSkip',nSkip);
+					//传了blogid这个字段
+					let cBlogTb = db.collection('message_tb');
+					cBlogTb.find({}).skip(nSkip).limit(nRows).toArray((err,data)=>{
+						// console.log('findData',data);
+						let json = JSON.stringify(data);
+						
+						//计算总共有多少条数据，返回页码给total
+						cBlogTb.count({},(err,count)=>{
+							let total = Math.ceil(count/10);
+							json = `{"total":${total},"data":${json}}`;
+						
+							// console.log('findJson',json);
+							res.writeHead(200, {});
+							res.end(json);
+							db.close();
+						});
+						
+					});
+
+					// function findData(collection,query,limit,callback){
+					// 	collection.find(query,limit).toArray((err,r)=>{
+
+					// 		if (typeof callback =='function') {
+					// 			callback(r);
+					// 		}
+					// 	});
+					// }
+				}else{
+					//404  没有这篇文章
+				}
+			}
+
+			//添加博客文章接口
+			else if (req.url.indexOf('publish')>=0) {
+				if(getReq['detail']){
+					let jData = {};
+					jData['tittle'] = getReq['tittle'];
+					jData['brief'] = getReq['brief'];
+					jData['autor'] = getReq['autor'];
+					jData['detail'] = getReq['detail'];
+					jData['typeid'] = parseInt(getReq['typeid']);
+					jData['typename'] = getReq['typename'];
+					jData['createtime'] = new Date();
+					jData['readnum'] = 0;
+					jData['comtnum'] = 0;
+					jData['colnum'] = 0;
+					let cBlogTb = db.collection('blog_tb');
+					cBlogTb.insertOne(jData,(err,_res)=>{
+						// console.log('insertOne',_res);
+						if (err) {
+				            console.log("Error:" + err);
+				            res.writeHead(300, {});
+							res.end('err');
+				        }else{
+				        	// console.log("cBlogTb:" ,'ok');
+				        	res.writeHead(200, {});
+							res.end('ok');
+				        }
+				        db.close();
+					});	
+				}
+			}
+
+			//添加用户注册接口
+			else if (req.url.indexOf('reg')>=0) {
+				if(getReq['username']){
+					let jData = {};
+					jData['username'] = getReq['username'];
+								
+					let cUserTb = db.collection('user_tb');
+
+
+					//先查询//todo
+					cUserTb.count(jData,(err,count)=>{
+						console.log('cUserTb.count',count);		
+						if (count>0) {
+							//存在用户名
+							let json = '{"code":101,"status":0,"msg":"已存在该用户"}';
+							res.writeHead(200, {});
+							res.end(json);
+							db.close();
+						}else{
+
+							jData['password'] = getReq['password'];
+							jData['isAdmin'] = getReq['isAdmin'];
+							jData['createtime'] = new Date();
+							//插入数据
+							cUserTb.insertOne(jData,(err,_res)=>{
+								// console.log('insertOne',_res);
+								let json = '{}';
+								if (err) {
+						            // console.log("Error:" + err);
+						            json = '{"code":102,"status":0,"msg":"数据查询出错"}';
+						            res.writeHead(200, {});
+									res.end(json);
+						        }else{
+						        	// console.log("cBlogTb:" ,'ok');
+						        	json = '{"code":100,"status":1,"msg":"注册成功"}';
+						        	res.writeHead(200, {});
+									res.end(json);
+						        }
+						        db.close();
+							});	
+
+
+						}
+							
+							
+					});
+
+					
+				}
+			}
+
+			//用户登录接口
+			else if (req.url.indexOf('login')>=0){
+				// console.log('login',getReq['username']);
+				if(getReq['username']){
+					//传了blogid这个字段
+					// console.log('login','login');
+					let cUserTb = db.collection('user_tb');
+						// console.log('cUserTb',cUserTb);
+						let query = {};
+						query["username"] = getReq['username'];
+						findOneData(cUserTb,query,(data)=>{
+							 // console.log('findOneData',data);
+							// let json = JSON.stringify(data);
+							 // console.log('json',json);
+							// console.log("getReq['password']",getReq['password']);
+							// console.log('json.password',data.password);
+							if (getReq['password']==data.password) {
+								//登录成功
+								 json = '{"code":100,"status":1,"msg":"登录成功"}';
+								  res.end(json);
+								  
+						          res.writeHead(200, {});
+								  
+							}else{
+ 								  json = '{"code":102,"status":0,"msg":"密码错误"}';
+ 								 
+						          res.writeHead(200, {});
+						          res.end(json);
+							}
+							
+							// console.log('findOneJson',json);
+							res.end(json);
+							db.close();
+						});
+
+					function findOneData(collection,qurery,callback){
+						collection.findOne(qurery,(err,r)=>{
+
+							if (typeof callback =='function') {
+								callback(r);
+							}
+						});
+					}
+				}else{
+					//404  没有这篇文章
+				}
+			}
 
         });		
 	}
