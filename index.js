@@ -350,7 +350,9 @@ const server = http.createServer((req,res)=>{
 							// console.log('json.password',data.password);
 							if (getReq['password']==data.password) {
 								//登录成功
-								 json = '{"code":100,"status":1,"msg":"登录成功"}';
+								 // json = '{"code":100,"status":1,"msg":"登录成功"}';
+								 json = `{"code":100,"status":1,"msg":"登录成功","userid":"${data._id}"}`;
+								 // console.log('json',json);
 								  res.end(json);
 								  
 						          res.writeHead(200, {});

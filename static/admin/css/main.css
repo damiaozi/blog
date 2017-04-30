@@ -73,7 +73,7 @@ article{
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	background: url("../images/index/cover_bg1_min.jpg") no-repeat;
+	background: url("../images/index/cover_bg3_min.jpg") no-repeat;
 	background-position: center;
 	width: 100%;
 	height: 100%;
@@ -109,82 +109,7 @@ article{
 .index-cover .cover-subtile:hover{
 	color: #fff;
 }
-.index-cover .cover-info>a{
-	display: inline-block;
-	padding: 14px 26px;
-	background-color: rgba(255,255,255,0.7);
-	font-size: 18px;
-	color: #333;
-	margin-top: 10%;
-}
-.index-cover .cover-info>a:hover{
-	background-color: rgba(255,255,255,0.1);
-	color: #fff;
-	border: 1px solid #fff;
-	
-}
 
-/*联系方式*/
-.index-media{
-	position: relative;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 800px;
-}
-
-.index-media .media-bg{
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	background: url("../images/index/cover_bg2_min.jpg") no-repeat;
-	background-position: center;
-	width: 100%;
-	height: 100%;
-	opacity: 0.8;
-
-}
-.index-media .media-info{
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 2;
-	text-align: center;
-}
-
-.index-media .media-tittle{
-	margin-top: 5%;
-	font-size: 100px;
-	color: #fff;
-}
-.index-media .media-tittle:hover{
-	color: #eee;
-}
-
-.index-media .media-subtile{
-	margin-top: 5%;
-	font-size: 28px;
-	color: #ccc;
-}
-.index-media .media-subtile:hover{
-	color: #fff;
-}
-.index-media .media-info>a{
-	display: inline-block;
-	padding: 14px 26px;
-	background-color: rgba(255,255,255,0.7);
-	font-size: 18px;
-	color: #333;
-	margin-top: 10%;
-}
-.index-media .media-info>a:hover{
-	background-color: rgba(255,255,255,0.1);
-	color: #fff;
-	border: 1px solid #fff;
-	
-}
 /*底部*/
 
 footer{
@@ -201,12 +126,13 @@ footer{
 }
 .blog-footer a{
 	cursor: pointer;
-	color: #333;
 }
 .blog-footer a:hover{
 	color: #f00;
 }
-
+.blog-footer span{
+	color: #f00;
+}
 
 /*max-width:900*/
 

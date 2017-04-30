@@ -7,7 +7,7 @@ var oSletLogin = $('#j-slet-login');
 var oSletReg = $('#j-slet-regist');
 var oSection = $('#j-section-login');
 
-var isLogin = false;
+var isLogin = true;
 oSletLogin.click(function(){
 	isLogin = true;
 	oSection.addClass('active');
@@ -79,6 +79,8 @@ function login(jData){
 			if (data.status == 1) {
 				// $(location).attr('href','message.html');
 				alert(data.msg);
+				window.localStorage.userid = data.userid;
+				location.href = 'publish.html';
 			}else{
 				alert(data.msg);
 			}				
