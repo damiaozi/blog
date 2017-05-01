@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>大苗子博客-登录界面</title>
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+<body>
+	<!-- 最大宽度1200px -->
+	<!-- 900有个固定margin -->
+	<!-- 800导航条变化 -->
+	<header id="blog-head">
+		<div class="blog-nav">
+			<div class="nav-left">I'm Miaozi</div>
+			<nav>
+				<ul>
+					<li><a href="index.html">博客首页</a></li>
+				<!-- 	<li><a href="blog.html">文章管理</a></li>
+					<li><a href="message.html">留言管理</a></li>
+					<li class="active"><a href="#">发布文章</a></li> -->
+				</ul>
+			</nav>
+		</div>
+
+	</header>
+	<article>
+		
+		<section id="j-section-login" class="index-media active">
+			<div class="media-bg"></div>
+			<div class="media-info">
+				<p class="media-tittle">
+				<span id="j-slet-login" class="slet-login">登录</span>|<span id="j-slet-regist" class="slet-regist">注册</span>
+				</p>
+				<p class="media-subtile">每一项都要填写</p>
+				<div class="msg-container">
+					
+						<div>
+							<p>账号:</p>
+							<input id="js-login-username" type="text">
+						</div>
+						<div>
+							<p>密码:</p>
+							<input id="js-login-password" type="password">
+						</div>
+						<div class="login-uname">
+							<p>昵称:</p>
+							<input id="js-blog-uname" type="text">
+						</div>
+				</div>
+				<button class="btn-login" id="j-msg-login">登录</button>
+				<button class="btn-regist" id="j-msg-regist">注册</button>
+			</div>
+		</section>
+	
+	</article>
+	<footer>
+		<div class="blog-footer">
+			<p>(C) 2010-2016 code & design by <a>Miaozi</a> powered by Node.js</p>
+		</div>
+	</footer>
+	<script src="js/jquery-1.12.4.js"></script>
+	<script src="js/login.js" ></script>
+</body>
+</html>
