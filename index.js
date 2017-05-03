@@ -101,14 +101,22 @@ const server = http.createServer((req,res)=>{
 				}
 			}
 		
-			//获取文章详情接口
+			//获取文章详情接口/增加阅读数
 			else if (req.url.indexOf('blogdetail')>=0){
-				if(getReq['blogid']){
-					//传了blogid这个字段
+				var sBlogid = getReq['blogid'];
+				if(sBlogid){
+					//传了blogid这个字段 
 					let cBlogTb = db.collection('blog_tb');
 						// console.log('cBlogTb',cBlogTb);
-						findOneData(cBlogTb,{_id:ObjectID(getReq['blogid'])},(data)=>{
+						findOneData(cBlogTb,{_id:ObjectID(sBlogid)},(data)=>{
 							 // console.log('findOneData',data);
+							 //更新阅读数，增加1
+							 let nReadnum = parseInt(data.readnum)+1;
+							cBlogTb.update({_id:ObjectID(sBlogid)},{$set:{readnum:nReadnum}},(err,_res)=>{
+								console.log('nReadnum',nReadnum);
+							});	
+
+							//返回详情给前端 
 							let json = JSON.stringify(data);
 							// console.log('findOneJson',json);
 							res.writeHead(200, {});
@@ -379,6 +387,36 @@ const server = http.createServer((req,res)=>{
 					}
 				}else{
 					//404  没有这篇文章
+				}
+			}
+
+			//设置博客文章的参数接口 点赞
+			else if (req.url.indexOf('addblogcolt')>=0) {
+				if(getReq['blogid']){
+					
+					let cBlogTb = db.collection('blog_tb');
+					let blogid = getReq['blogid'];
+					cBlogTb.findOne({_id:ObjectID(blogid)},(err,data)=>{
+						 console.log('findOneData',data);
+						let nColnum = parseInt(data.colnum)+1;
+						// let json = JSON.stringify(data);
+						console.log('nColnum',nColnum);
+						cBlogTb.update({_id:ObjectID(blogid)},{$set:{colnum:nColnum}},(err,_res)=>{
+							// console.log('colnum',_res);
+							if (err) {
+					            console.log("Error:" + err);
+					            res.writeHead(300, {});
+								res.end('err');
+					        }else{
+					        	res.writeHead(200, {});
+								res.end('ok');
+								 console.log('ok','ok');
+					        }
+					        db.close();
+						});	
+					});
+
+					
 				}
 			}
 

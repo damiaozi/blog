@@ -29,7 +29,7 @@ aTypeA.click(function(){
 	bPageInit = false;
 	getBlogLst(1);
 });
-
+var aData = [];
 function getBlogLst(page){
 	$.ajax({
 		type:'get',
@@ -39,11 +39,12 @@ function getBlogLst(page){
 		success:function(json){
 			// console.log('blog_list',json);
 			var total = json['total'];
-			var data = json['data'];
+			//设为全局
+			aData = json['data'];
 			oBlogLst.children().remove();
 			//创建li标签，并且把数据填上，再添加到ul标签里
-			for(var i in data){
-				var json = data[i];
+			for(var i in aData){
+				var json = aData[i];
 				var _id = json._id;
 				var sLiHtml = `<li class="blog-item"><div class="blog-content">
 							<a href="blog_detail.html?blogid=${_id}"><h2>${json.tittle}</h2></a>
@@ -55,15 +56,28 @@ function getBlogLst(page){
 									<span>${json.createtime}</span>
 								</div>
 								<div class="blog-read">
+									<a id='j-read' href='Javascript:;'>
 									<i>阅</i>
 									<span>${json.readnum}</span>
+									</a>
+									
+									<a id='j-coment' href='Javascript:;'>
 									<i>评</i>
 									<span>${json.comtnum}</span>
+									</a>
+									
+									<a class='j-zan' href='Javascript:;' data-index=${i} data-blogid=${_id}>
 									<i>赞</i>
 									<span>${json.colnum}</span>
+									</a>
+									
 							</div></div></div></li>`;
 				$(sLiHtml).appendTo(oBlogLst);
 			}	
+
+			//初始化每个按钮的事件
+			initZanUi();
+
 			//初始化之后就不重复执行了
 			if (!bPageInit) {
 				pageInit(total);
@@ -91,5 +105,34 @@ function pageInit(total){
 		getBlogLst(nPage);
 	});
 }
+
+
+ function initZanUi(){
+ 	var sHostUrl = '';
+	var sUrlAddColt = sHostUrl+'/api/addblogcolt'
+	var oZan = $('.j-zan');
+	oZan.each(function(){
+		$(this).click(function(){
+			// var index = oZan.attr('data-index');
+			// var json = aData[index];
+			// var blogid = json._id;
+			var blogid = $(this).attr('data-blogid');
+			$.ajax({
+				type:'get',
+				url:sUrlAddColt,
+				data:{'blogid':blogid},
+				dataType:'text',
+				success:function(data){
+					// console.log('zan',data);	
+					if(data =='ok'){
+						alert('点赞成功');
+					}
+					//把赞的数量加1  todo
+				}
+			});
+		});
+	});
+	
+ }
 
 

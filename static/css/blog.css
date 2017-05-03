@@ -175,8 +175,20 @@ article{
 	float: right;
 }
 
-.blog-read span{
+.blog-read a{
 	margin-right: 5px;
+	color: #ccc;
+}
+
+/*后台管理控制块 删除。修改*/
+/*不知道为什么admin的blog.css不生效*/
+.blog-tool{
+	
+	background-color: #f00;
+}
+.blog-tool .blog-delete{
+	display: inline-block;
+	float: right;
 }
 
 /*分页*/

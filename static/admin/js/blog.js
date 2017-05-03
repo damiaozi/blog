@@ -61,7 +61,18 @@ function getBlogLst(page){
 									<span>${json.comtnum}</span>
 									<i>赞</i>
 									<span>${json.colnum}</span>
-							</div></div></div></li>`;
+							</div></div>
+							<div class="blog-tool">							
+							<div class="blog-delete js-delete" data-blogid=${_id}>
+								<i></i>
+								<span>删除</span>
+							</div>
+							<div class="blog-update js-update">
+								<i></i>
+								<span>修改</span>
+							</div>
+							</div>
+							</div></li>`;
 				$(sLiHtml).appendTo(oBlogLst);
 			}	
 			//初始化之后就不重复执行了
@@ -93,3 +104,25 @@ function pageInit(total){
 }
 
 
+function initUiTool(){
+	$('.js-delete').each(function(){
+		$(this).click(function(){
+			var blogid = $(this).attr('data-blogid');
+			$.ajax({
+				type:'get',
+				url:sUrlAddColt,
+				data:{'blogid':blogid},
+				dataType:'text',
+				success:function(data){
+					// console.log('zan',data);	
+					if(data =='ok'){
+						alert('删除成功');
+						//更新ui的界面
+						//删除对应下选项 、、todo
+					}
+					
+				}
+			});
+		});
+	});
+}
