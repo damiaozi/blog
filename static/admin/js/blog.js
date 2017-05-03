@@ -55,19 +55,27 @@ function getBlogLst(page){
 									<span>${json.createtime}</span>
 								</div>
 								<div class="blog-read">
+									<a id='j-read' href='Javascript:;'>
 									<i>阅</i>
 									<span>${json.readnum}</span>
+									</a>
+									
+									<a id='j-coment' href='Javascript:;'>
 									<i>评</i>
 									<span>${json.comtnum}</span>
+									</a>
+									
+									<a class='j-zan' href='Javascript:;' data-index=${i} data-blogid=${_id}>
 									<i>赞</i>
 									<span>${json.colnum}</span>
+									</a>
 							</div></div>
 							<div class="blog-tool">							
 							<div class="blog-delete js-delete" data-blogid=${_id}>
 								<i></i>
 								<span>删除</span>
 							</div>
-							<div class="blog-update js-update">
+							<div class="blog-update js-update" data-blogid=${_id}>
 								<i></i>
 								<span>修改</span>
 							</div>
@@ -75,6 +83,8 @@ function getBlogLst(page){
 							</div></li>`;
 				$(sLiHtml).appendTo(oBlogLst);
 			}	
+			//初始化删除和修改的点击事件
+			initUiTool();
 			//初始化之后就不重复执行了
 			if (!bPageInit) {
 				pageInit(total);
@@ -105,12 +115,13 @@ function pageInit(total){
 
 
 function initUiTool(){
+	var sUrlBlogdel = sHostUrl+'/api/blog_delete'
 	$('.js-delete').each(function(){
 		$(this).click(function(){
 			var blogid = $(this).attr('data-blogid');
 			$.ajax({
 				type:'get',
-				url:sUrlAddColt,
+				url:sUrlBlogdel,
 				data:{'blogid':blogid},
 				dataType:'text',
 				success:function(data){
@@ -118,11 +129,18 @@ function initUiTool(){
 					if(data =='ok'){
 						alert('删除成功');
 						//更新ui的界面
-						//删除对应下选项 、、todo
+						//删除对应的选项 、、todo
 					}
 					
 				}
 			});
+		});
+	});
+	//更新
+	$('.js-update').each(function(){
+		$(this).click(function(){
+			var blogid = $(this).attr('data-blogid');
+			location.href = 'publish.html?blogid='+blogid;
 		});
 	});
 }

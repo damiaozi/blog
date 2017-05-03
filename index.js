@@ -269,6 +269,7 @@ const server = http.createServer((req,res)=>{
 					jData['typeid'] = parseInt(getReq['typeid']);
 					jData['typename'] = getReq['typename'];
 					jData['createtime'] = new Date();
+					jData['updatetime'] = new Date();
 					jData['readnum'] = 0;
 					jData['comtnum'] = 0;
 					jData['colnum'] = 0;
@@ -419,6 +420,62 @@ const server = http.createServer((req,res)=>{
 					
 				}
 			}
+
+			//删除指定单篇文章
+			else if (req.url.indexOf('blog_delete')>=0){
+				var sBlogid = getReq['blogid'];
+				if(sBlogid){
+					let cBlogTb = db.collection('blog_tb');
+					cBlogTb.deleteOne({_id:ObjectID(sBlogid)},(err,_res)=>{
+						// console.log('colnum',_res);
+						if (err) {
+				            console.log("Error:" + err);
+				            res.writeHead(300, {});
+							res.end('err');
+				        }else{
+				        	res.writeHead(200, {});
+							res.end('ok');
+							 console.log('ok','deleteok');
+				        }
+				        db.close();
+					});
+				}else{
+					//404  没有这篇文章
+				}
+			}
+
+			//修改博客文章接口
+			else if (req.url.indexOf('blog_update')>=0) {
+				var sBlogid = getReq['blogid'];
+				if(sBlogid){
+					let jData = {};
+					jData['tittle'] = getReq['tittle'];
+					jData['brief'] = getReq['brief'];
+					jData['autor'] = getReq['autor'];
+					jData['detail'] = getReq['detail'];
+					jData['typeid'] = parseInt(getReq['typeid']);
+					jData['typename'] = getReq['typename'];
+					jData['updatetime'] = new Date();
+					// jData['readnum'] = 0;
+					// jData['comtnum'] = 0;
+					// jData['colnum'] = 0;
+					let cBlogTb = db.collection('blog_tb');
+					cBlogTb.update({_id:ObjectID(sBlogid)},{$set:jData},(err,_res)=>{
+							// console.log('colnum',_res);
+							if (err) {
+					            console.log("Error:" + err);
+					            res.writeHead(300, {});
+								res.end('err');
+					        }else{
+					        	res.writeHead(200, {});
+								res.end('ok');
+								console.log('ok','ok');
+					        }
+					        db.close();
+						});		
+				}
+			}
+
 
         });		
 	}

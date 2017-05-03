@@ -179,6 +179,29 @@ article{
 	margin-right: 5px;
 }
 
+/*后台管理操作删除和修改帖子*/
+/*后台管理控制块 删除。修改*/
+/*不知道为什么admin的blog.css不生效*/
+.blog-tool{
+	overflow: hidden;
+	margin-top: 16px;
+	
+}
+.blog-tool>div{
+	display: inline-block;
+	float: right;
+	color: #fff;
+	padding: 4px 14px;
+	margin-right: 10px;
+	background-color: #7bbcff;
+	font-size: 14px;
+	cursor: pointer;
+
+}
+
+.blog-tool>div:hover{
+	background-color: #3d9cfd;
+}
 /*分页*/
 .blog-page{
 	padding: 20px;
