@@ -13,7 +13,7 @@ const server = http.createServer((req,res)=>{
 	let filePath = path.join(__dirname,'/static/',theUrl.path);
 	filePath = filePath.split('?')[0];
 	if(theUrl.query==null || theUrl.path.indexOf('/api')<0){
-	
+	 
 		//无参数,返回html页面
 		if (theUrl.path =='/'){
 			filePath = path.join(__dirname,'static/index.html');
