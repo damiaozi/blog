@@ -24,7 +24,7 @@ function getBlogLst(page){
 			for(var i in data){
 				var json = data[i];
 			
-				var sLiHtml = `<li class="message-item">
+				var sLiHtml = `<li class="message-item" data-msgid=${json._id}>
 					<div class="message-content">
 						<div class="message-title">
 							<img src="images/tou.jpg">
@@ -39,9 +39,21 @@ function getBlogLst(page){
 						<a href="#" class="message-read">
 								<i>赞</i>
 								<span>${json.colnum==null?0:json.colnum}</span>	
-						</a></div></li>`;
+						</a>
+						<div class="blog-tool">							
+							<div class="blog-delete js-delete" data-msgid=${json._id}>
+								<i></i>
+								<span>删除</span>
+							</div>
+							
+							</div>
+						</div></li>`;
 				$(sLiHtml).appendTo(oMsgLst);
 			}	
+
+			//初始化删除和修改的点击事件
+			initUiTool();
+
 			//初始化之后就不重复执行了
 			if (!bPageInit) {
 				pageInit(total);
@@ -70,4 +82,30 @@ function pageInit(total){
 	});
 }
 
+
+function initUiTool(){
+	var sUrlMsgdel = sHostUrl+'/api/msg_delete'
+	$('.js-delete').each(function(){
+		$(this).click(function(){
+			var msgid = $(this).attr('data-msgid');
+			$.ajax({
+				type:'get',
+				url:sUrlMsgdel,
+				data:{'msgid':msgid},
+				dataType:'text',
+				success:function(data){
+					// console.log('zan',data);	
+					if(data =='ok'){
+						alert('删除成功');
+						//更新ui的界面
+						//删除对应的选项 、、todo
+						// $(this).remove();
+						$(`.message-item[data-msgid=${msgid}]`).remove();
+					}
+					
+				}
+			});
+		});
+	});
+}
 

@@ -476,6 +476,28 @@ const server = http.createServer((req,res)=>{
 				}
 			}
 
+			//删除指定留言内容
+			else if (req.url.indexOf('msg_delete')>=0){
+				var sMsgid = getReq['msgid'];
+				if(sMsgid){
+					let cMsgTb = db.collection('message_tb');
+					cMsgTb.deleteOne({_id:ObjectID(sMsgid)},(err,_res)=>{
+						// console.log('colnum',_res);
+						if (err) {
+				            console.log("Error:" + err);
+				            res.writeHead(300, {});
+							res.end('err');
+				        }else{
+				        	res.writeHead(200, {});
+							res.end('ok');
+							 console.log('ok','deleteok');
+				        }
+				        db.close();
+					});
+				}else{
+					//404  没有这篇文章
+				}
+			}
 
         });		
 	}

@@ -89,9 +89,10 @@ function publish(sUrl,jData,iType){
 		success:function(data){
 			// console.log('me-ajax',data);
 			if (data == 'ok') {
-				// $(location).attr('href','message.html');
+				
 				if (iType) {
 					alert('更新成功了！');
+					location.href = 'blog.html';
 				}else{
 					alert('发布成功了！');
 				}

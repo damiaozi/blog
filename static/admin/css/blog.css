@@ -179,9 +179,8 @@ article{
 	margin-right: 5px;
 }
 
-/*后台管理操作删除和修改帖子*/
+
 /*后台管理控制块 删除。修改*/
-/*不知道为什么admin的blog.css不生效*/
 .blog-tool{
 	overflow: hidden;
 	margin-top: 16px;

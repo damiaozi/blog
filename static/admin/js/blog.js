@@ -45,7 +45,7 @@ function getBlogLst(page){
 			for(var i in data){
 				var json = data[i];
 				var _id = json._id;
-				var sLiHtml = `<li class="blog-item"><div class="blog-content">
+				var sLiHtml = `<li class="blog-item" data-blogid=${_id}><div class="blog-content">
 							<a href="blog_detail.html?blogid=${_id}"><h2>${json.tittle}</h2></a>
 							<div class="blog-tag"><i></i><a href="Javascript:;">${json.typename}</a></div>
 							<a href="blog_detail.html?blogid=${_id}"><p class="blog-review">${json.brief}</p></a>
@@ -130,6 +130,7 @@ function initUiTool(){
 						alert('删除成功');
 						//更新ui的界面
 						//删除对应的选项 、、todo
+						$(`.blog-item[data-blogid=${blogid}]`).remove();
 					}
 					
 				}

@@ -55,35 +55,7 @@ article{
 	
 }
 
-.message-top{
-	background-color: #fff;
-	
-	margin: 30px 30px 0px 30px;
-}
 
-.message-top .message-title{
-	overflow: hidden;
-	cursor: pointer;
-	display: block;
-    height: 50px;
-    line-height: 50px;
-    font-size: 20px;
-    color: #ccc;
-    margin: 20px 20px 0px 20px;
-}
-
-
-.message-top .message-title>img{
-	float: left;
-	display: block;
-	width: 40px;
-	height: 40px;
-	margin-top: 5px;
-}
-.message-top .message-title>p{
-	float: left;
-	margin-left: 10px;
-}
 
 .message-item{
 	padding: 30px 30px 0px 30px;
@@ -139,6 +111,28 @@ article{
 
 .message-read span{
 	margin-right: 5px;
+}
+
+/*后台管理控制块 删除。修改*/
+.blog-tool{
+	overflow: hidden;
+	margin-top: 16px;
+	
+}
+.blog-tool>div{
+	display: inline-block;
+	float: right;
+	color: #fff;
+	padding: 4px 14px;
+	margin-right: 10px;
+	background-color: #7bbcff;
+	font-size: 14px;
+	cursor: pointer;
+
+}
+
+.blog-tool>div:hover{
+	background-color: #3d9cfd;
 }
 
 /*分页*/
