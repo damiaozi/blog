@@ -117,6 +117,7 @@ function pageInit(total){
 			// var json = aData[index];
 			// var blogid = json._id;
 			var blogid = $(this).attr('data-blogid');
+			var oZanThis = $(this);
 			$.ajax({
 				type:'get',
 				url:sUrlAddColt,
@@ -126,6 +127,9 @@ function pageInit(total){
 					// console.log('zan',data);	
 					if(data =='ok'){
 						alert('点赞成功');
+						var nZan = oZanThis.children('span').html();
+						nZan++;
+						oZanThis.children('span').html(nZan);
 					}
 					//把赞的数量加1  todo
 				}
